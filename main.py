@@ -5,10 +5,11 @@ import time
 import tkinter as tk
 from tkinter import filedialog
 import sys
+import json
 
 os.environ['SDL_AUDIODRIVER'] = 'dsp'
 
-version = 'V2.1'
+version = 'V2.3'
 
 # setup pygame window
 pygame.init()
@@ -16,17 +17,17 @@ screen = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("Conway's Game of Life")
 
 # simulation rules
-grid_file = open('grid.txt', 'r')
-grid_settings = grid_file.readlines()
-lonely = int(grid_settings[2]) # minimum number of neighbors needed for a cell to survive (2 in the original Game of Life)
-overcrowd = int(grid_settings[3]) # maximum number of neighbors needed for a cell to survive (4 in the original Game of Life)
-born = int(grid_settings[4]) # number of neighbors needed for a cell to come to life (3 in the Original game of Life)
+grid_file = open('grid.json', 'r')
+grid_settings = json.load(grid_file)
+lonely = int(grid_settings["LONELY"]) # minimum number of neighbors needed for a cell to survive (2 in the original Game of Life)
+overcrowd = int(grid_settings["OVERCROWD"]) # maximum number of neighbors needed for a cell to survive (4 in the original Game of Life)
+born = int(grid_settings["BORN"]) # number of neighbors needed for a cell to come to life (3 in the Original game of Life)
 
 # world size
-WORLD_WIDTH = int(grid_settings[0])
-WORLD_HEIGHT = int(grid_settings[1])
+WORLD_WIDTH = int(grid_settings["WIDTH"])
+WORLD_HEIGHT = int(grid_settings["HEIGHT"])
 
-DEFAULT_SIZE = int(grid_settings[5])
+DEFAULT_SIZE = int(grid_settings["CELL_SIZE"])
 CELL_SIZE = DEFAULT_SIZE
 
 simulation_rate = 30 # speed of the simulation in generations per second
@@ -37,7 +38,7 @@ SCROLL_X = round(((WORLD_WIDTH * 10) / 2) - 400)
 SCROLL_Y = round(((WORLD_HEIGHT * 10) / 2) - 250)
 SCROLL_SPEED = 0.8
 
-grid = bool(grid_settings[6])
+grid = bool(grid_settings["GRID"])
 
 # fonts
 font1 = pygame.font.Font(None, 32)
@@ -243,18 +244,18 @@ def load_from_save(name, width, height):
 
 def load_grid_data():
     global grid_data, WORLD_WIDTH, WORLD_HEIGHT, lonley, overcrowd, born, simulation_rate, grid
-    with open('grid.txt', 'r') as grid:
-        grid_data = grid.readlines()
-        WORLD_WIDTH = int(grid_data[0])
-        WORLD_HEIGHT = int(grid_data[1])
+    with open('grid.json', 'r') as grid:
+        grid_data = json.load(grid)
+        WORLD_WIDTH = int(grid_data["WIDTH"])
+        WORLD_HEIGHT = int(grid_data["WIDTH"])
         
-        lonley = int(grid_data[2])
-        overcrowd = int(grid_data[3])
-        born = int(grid_data[4])
+        lonley = int(grid_data["LONELY"])
+        overcrowd = int(grid_data["OVERCROWD"])
+        born = int(grid_data["BORN"])
         
-        simulation_rate = int(grid_data[5])
+        simulation_rate = int(grid_data["SIMULATION_RATE"])
         
-        grid = eval(grid_data[6])
+        grid = bool(grid_data["GRID"])
 
 print(f'Welcome to The Game of Life {version}! Use the tools to draw an arrangement of cells and press space to run the simulation!')
 load_grid_data() # load grid data from save file
