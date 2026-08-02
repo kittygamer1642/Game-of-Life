@@ -1,0 +1,10 @@
+{
+    "WIDTH": 160,
+    "HEIGHT": 100,
+    "LONELY": 2,
+    "OVERCROWD": 4,
+    "BORN": 3,
+    "CELL_SIZE": 10,
+    "GRID": "True",
+    "SIMULATION_RATE": 30
+}
