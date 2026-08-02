@@ -286,7 +286,7 @@ while True:
     for event in pygame.event.get():
         # exit the program if the user closes the window
         if event.type == pygame.QUIT:
-            save_grid('backup.life') # save the current grid in a file before closing
+            save_grid('backup') # save the current grid in a file before closing
             pygame.quit()
             sys.exit()
         
