@@ -1,5 +1,5 @@
 # The Game of Life
-This is a Python implementation of John Conway's Game of Life.
+This is a Python implementation of [John Conway's Game of Life](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjWiq7u4quXAxUq_skDHR93IxgQFnoECCMQAQ&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FConway%2527s_Game_of_Life&usg=AOvVaw3Ren4zMW9qfyNBCmJvYMlL&opi=89978449).
 
 The game is played on a grid of sqare cells that can be $${\color{#00ff00}\text{alive}}$$ or $${\color{#ff0000}\text{dead}}$$, and the user defines the inital layout.
 When the simulation is run, the following rules are applied to each cell:
